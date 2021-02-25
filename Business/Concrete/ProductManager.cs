@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -24,10 +25,12 @@ namespace Business.Concrete
 
             if (product.ProductName.Length < 2)
             {
-                return new ErrorResult("ürün adı en az 2 karakter olmalıdır");
+                //magic strings düzeltildi
+
+                return new ErrorResult(Messages.ProductNameInvalid);
             }
             _productDal.Add(product);
-            return new SuccessResult(" ürün eklendi");
+            return new SuccessResult(Messages.ProductAdded);
         }
 
         public List<Product> GetAll()
