@@ -33,9 +33,14 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        public List<Product> GetAll()
+        public IDataResult<List<Product>> GetAll()
         {
-            return _productDal.GetAll();
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult();
+            }
+
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(),true,"ürünler listelendi");
         }
 
         public List<Product> GetAllByCategoryId(int id)
